@@ -89,7 +89,7 @@ class _WeatherPageState extends State<WeatherPage> {
                 if (_weather != null)
                   Lottie.asset(
                     getWeatherAnimation(_weather?.mainCondition),
-                    height: 200,
+                    height: 150,
                   )
                 else
                   const CircularProgressIndicator(),
@@ -101,7 +101,10 @@ class _WeatherPageState extends State<WeatherPage> {
                 ),
 
                 // condition
-                Text(_weather?.mainCondition ?? ''),
+                Text(
+                  _weather?.mainCondition ?? '',
+                  style: const TextStyle(color: Colors.white, fontSize: 20),
+                ),
               ],
             ),
           ),

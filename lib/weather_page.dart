@@ -16,7 +16,7 @@ class _WeatherPageState extends State<WeatherPage> {
   Weather? _weather;
 
   // fetch weather
-  Future<void> _fetchWeather() async {
+  _fetchWeather() async {
     // get current city
     String cityName = await _weatherService.getCurrentCity();
 
@@ -67,29 +67,43 @@ class _WeatherPageState extends State<WeatherPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: SingleChildScrollView(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              // city name
-              Text(_weather?.cityName ?? 'Loading city...'),
+      body: Container(
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+              begin: Alignment.topRight,
+              end: Alignment.center,
+              colors: [Color(0xFF4c4377), Color(0xFF281755)]),
+        ),
+        child: Center(
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                // city name
+                Text(
+                  _weather?.cityName ?? 'Loading city...',
+                  style: const TextStyle(color: Colors.white, fontSize: 20),
+                ),
 
-              // Animation
-              if (_weather != null)
-                Lottie.asset(
-                  getWeatherAnimation(_weather?.mainCondition),
-                  height: 200,
-                )
-              else
-                const CircularProgressIndicator(),
+                // Animation
+                if (_weather != null)
+                  Lottie.asset(
+                    getWeatherAnimation(_weather?.mainCondition),
+                    height: 200,
+                  )
+                else
+                  const CircularProgressIndicator(),
 
-              // temperature
-              Text('${_weather?.temperature.round()}ºC'),
+                // temperature
+                Text(
+                  '${_weather?.temperature.round()}ºC',
+                  style: const TextStyle(color: Colors.white, fontSize: 20),
+                ),
 
-              // condition
-              Text(_weather?.mainCondition ?? ''),
-            ],
+                // condition
+                Text(_weather?.mainCondition ?? ''),
+              ],
+            ),
           ),
         ),
       ),
